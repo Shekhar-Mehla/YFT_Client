@@ -39,14 +39,9 @@ const TottalSavingsGraph = () => {
   return (
     <div>
       <h3>Saving Trend</h3>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={250}>
         {data.length > 0 ? (
-          <AreaChart
-            width={500}
-            height={400}
-            data={data}
-            margin={{ top: 10, right: 30, left: 20, bottom: 5 }}
-          >
+          <AreaChart width="100%" height={250} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
             <YAxis />

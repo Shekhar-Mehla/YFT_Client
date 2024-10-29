@@ -53,17 +53,17 @@ const IncomeSourcePiechar = () => {
   return (
     <div>
       <h3>Your Income Source</h3>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={250}>
         {incomeData.length > 0 ? (
           <PieChart>
             <Pie
               data={incomeData}
               dataKey="value"
               nameKey="name"
-              cx={120}
-              cy={200}
-              innerRadius={40}
-              outerRadius={120}
+              cx="50%"
+              cy="50%"
+              outerRadius={110}
+              innerRadius={35}
               fill="#8884d8"
               paddingAngle={5}
               label={renderCustomizedLabel}
@@ -76,6 +76,7 @@ const IncomeSourcePiechar = () => {
                 );
               })}
             </Pie>
+            <Legend></Legend>
             <Tooltip />
           </PieChart>
         ) : (

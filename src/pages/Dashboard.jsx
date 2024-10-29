@@ -22,37 +22,29 @@ const Dashboard = () => {
               <DashboardHero className="bg-dark text-muted border-rounded rounded-3 shawod"></DashboardHero>
             </Col>
           </Row>
-          <Row className="m-3 p-3 d-flex  gap-2 justify-content-between">
-            <Col md={5}>
-              <Card className="shadow  flex-wrap ">
-                <Card.Body>
-                  <TottalSavingsGraph></TottalSavingsGraph>{" "}
-                </Card.Body>
+          <Row className="  d-flex mt-3  gap-3 justify-content-between">
+            <Col sm={5}>
+              <Card className="shadow p-2  flex-wrap ">
+                <TottalSavingsGraph></TottalSavingsGraph>{" "}
               </Card>
             </Col>
-            <Col md={5}>
+            <Col sm={5}>
               <Card className="shadow">
-                <Card.Body>
-                  <IncomeGraph></IncomeGraph>{" "}
-                </Card.Body>
+                <IncomeGraph></IncomeGraph>{" "}
               </Card>
             </Col>
           </Row>
           {/* this row is for pie charts */}
-          <Row className="m-3 p-3 d-flex  gap-2 justify-content-between">
-            <Col md={5}>
-              <Card className="shadow  flex-wrap ">
-                <Card.Body>
-                  <IncomeSourcePiechar></IncomeSourcePiechar>
-                </Card.Body>
+          <Row className="d-flex mt-3  gap-3 justify-content-between">
+            <Col sm={5}>
+              <Card className="shadow p-2  flex-wrap ">
+                <IncomeSourcePiechar></IncomeSourcePiechar>
               </Card>
             </Col>
-            <Col md={5}>
+            <Col sm={5}>
               <Card className="shadow  flex-wrap ">
-                <Card.Body>
-                  {/* income here */}
-                  <ExpenseSourcePieChart></ExpenseSourcePieChart>
-                </Card.Body>
+                {/* income here */}
+                <ExpenseSourcePieChart></ExpenseSourcePieChart>
               </Card>
             </Col>
           </Row>

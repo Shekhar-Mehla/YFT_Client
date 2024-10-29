@@ -52,7 +52,7 @@ const ExpenseSourcePieChart = () => {
   return (
     <div>
       <h3>Expense Sources</h3>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={250}>
         {expenseData.length > 0 ? (
           <PieChart>
             <Pie
@@ -61,8 +61,8 @@ const ExpenseSourcePieChart = () => {
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius={150}
-              innerRadius={60}
+              outerRadius={110}
+              innerRadius={35}
               fill="#ff6347"
               label={renderCustomizedLabel}
               labelLine={false}

@@ -46,7 +46,7 @@ const IncomeGraph = () => {
   return (
     <div>
       <h3>Income Trend</h3>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={250}>
         {formattedData.length > 0 ? (
           <LineChart data={formattedData}>
             <CartesianGrid strokeDasharray="3 3" />
