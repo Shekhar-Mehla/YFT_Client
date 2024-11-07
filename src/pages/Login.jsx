@@ -9,7 +9,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { userdata } from "../context/ContextApi.jsx";
 
 import CustomeInput from "../Component/CustomeInput.jsx";
-import { useForm } from "../context/useForm.js";
+import { useForm } from "../CustomHooks/useForm.js";
 import { InputFields } from "../Utility/Inputfield.js";
 const Login = () => {
   const navigate = useNavigate();
@@ -17,10 +17,11 @@ const Login = () => {
 
   const goToPage = location?.state?.from?.pathname || "/dashboard";
   const { handleOnSubmit, handleOnChange } = useForm();
-  const { user } = userdata();
+  const { user, isSubmit } = userdata();
+  console.log(user._id);
 
   useEffect(() => {
-    user._id && navigate(goToPage);
+    user?._id && navigate(goToPage);
   }, [user._id, goToPage, navigate]);
 
   const LoginInputFields = InputFields.filter(
@@ -57,6 +58,7 @@ const Login = () => {
                 className="w-100 mt-3 btn-animate"
                 variant="primary"
                 type="submit"
+                disabled={isSubmit}
               >
                 Login
               </Button>

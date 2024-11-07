@@ -5,13 +5,14 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import CustomeInput from "../Component/CustomeInput.jsx";
-import { useForm } from "../context/useForm.js";
+import { useForm } from "../CustomHooks/useForm.js";
 import { InputFields } from "../Utility/Inputfield.js";
+import { userdata } from "../context/ContextApi.jsx";
 
-import { imges } from "../assets/assets.js";
 import Quotes from "../Component/Quotes.jsx";
 
 const Register = () => {
+  const { isSubmit } = userdata();
   const { handleOnSubmit, handleOnChange } = useForm();
   const registerInputFields = InputFields.filter(
     (input) =>
@@ -51,6 +52,7 @@ const Register = () => {
                 className="w-100 mt-3 btn-animate"
                 variant="primary"
                 type="submit"
+                disabled={isSubmit}
               >
                 Register
               </Button>

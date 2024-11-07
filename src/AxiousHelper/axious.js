@@ -1,7 +1,8 @@
 import axios from "axios";
+// const baseurl = "http://localhost:3002/api/v1";
 const baseurl = import.meta.env.VITE_BASE_URL + "/api/v1";
 import { toast } from "react-toastify";
-
+console.log(baseurl);
 const ApiendPoint = async ({ data, method, url, headers }) => {
   try {
     const response = await axios({
@@ -34,6 +35,7 @@ export const loginUser = async (data) => {
     data,
   };
   const result = await ApiendPoint(obj);
+
   return result;
 };
 
@@ -87,5 +89,6 @@ export const deleteTransaction = async (transactionsToDelete) => {
     },
   };
   const result = await ApiendPoint(obj);
+
   return result;
 };

@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
 import { autoLogin } from "../Utility/Autologin.js";
 
 import { fetchTransactions } from "../Utility/fetchTransactions.js";
@@ -10,19 +9,21 @@ export const CentralState = createContext();
 export const CentralstateProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [transactions, setTransactions] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [show, setShow] = useState(false);
-
+  console.log(user);
   const toggle = () => {
     show ? setShow(false) : setShow(true);
   };
 
   useEffect(() => {
     !user?._id && autoLoginUser();
-  }, [user]);
+  }, [user?._id]);
 
   const autoLoginUser = async () => {
     const fetchUser = await autoLogin();
     console.log("auto login cALLED");
+
     if (fetchUser?._id) {
       setUser(fetchUser);
       updateTransaction();
@@ -38,6 +39,8 @@ export const CentralstateProvider = ({ children }) => {
     setUser,
     toggle,
     show,
+    setIsSubmit,
+    isSubmit,
 
     transactions,
     setTransactions,

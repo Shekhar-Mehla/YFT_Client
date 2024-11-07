@@ -5,7 +5,7 @@ import {
   postTransaction,
 } from "../AxiousHelper/axious.js";
 import { toast } from "react-toastify";
-import { userdata } from "./ContextApi.jsx";
+import { userdata } from "../context/ContextApi.jsx";
 import { useNavigate } from "react-router-dom";
 
 import { fetchTransactions } from "../Utility/fetchTransactions.js";
@@ -24,12 +24,17 @@ const handleOnSubmit = async (
   setUser,
   navigate,
   setTransactions,
-  toggle
+  toggle,
+  setIsSubmit
 ) => {
   console.log(e);
   // prevent the browser refresh on form submission
   e.preventDefault();
-  console.log(form);
+  setIsSubmit(true);
+  setTimeout(() => {
+    setIsSubmit(false);
+    console.log("button is active now");
+  }, 3000);
 
   // this code will be executed when user will register for the first time
   if (
@@ -51,8 +56,9 @@ const handleOnSubmit = async (
   if (!form.confirmPasswordHashed && !form.type && !form.amount && !form.date) {
     // call user login api
     const { status, message, token, User } = await loginUser(form);
-
+    console.log(User);
     if (status === "success") {
+      console.log("this login code is executed");
       localStorage.setItem("token", token);
       setUser(User);
 
@@ -84,6 +90,7 @@ const handleOnSubmit = async (
       const { status, message, result } = await fetchTransactions();
       console.log(result);
       setTransactions(result);
+
       toast[status](message);
     }
 
@@ -94,9 +101,9 @@ const handleOnSubmit = async (
 
 export const useForm = () => {
   const [form, setForm] = useState({});
-  const { setUser, setTransactions, toggle } = userdata();
+  const { setUser, setTransactions, toggle, setIsSubmit, user } = userdata();
   const navigate = useNavigate();
-
+  console.log(user);
   const value = {
     handleOnChange: (e) => handleOnChange(e, form, setForm),
 
@@ -108,7 +115,8 @@ export const useForm = () => {
         setUser,
         navigate,
         setTransactions,
-        toggle
+        toggle,
+        setIsSubmit
       ),
   };
 

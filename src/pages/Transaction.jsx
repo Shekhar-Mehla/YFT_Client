@@ -3,12 +3,11 @@ import TransactionForm from "../Component/TransactionForm";
 import Table from "react-bootstrap/Table";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import { userdata } from "../context/ContextApi";
 
 import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
 import { MdDelete } from "react-icons/md";
-import { TbHttpDelete } from "react-icons/tb";
+import { userdata } from "../context/ContextApi";
 import { toast } from "react-toastify";
 
 import { deleteTransaction } from "../AxiousHelper/axious.js";
@@ -16,7 +15,7 @@ import { fetchTransactions } from "../Utility/fetchTransactions.js";
 
 const Transaction = () => {
   const [transactionsToDelete, setTransactionToDelete] = useState([]);
-  const { transactions, show, toggle, setTransactions } = userdata();
+  const { transactions, show, toggle, setTransactions, isSubmit } = userdata();
 
   const [display, setDisplay] = useState(false);
   const [transactionsToDispaly, setTransactionsTODisplay] = useState([]);
@@ -134,7 +133,7 @@ const Transaction = () => {
                 />
               </Col>
               <Col md="auto" className="d-grid">
-                <Button className="" onClick={toggle}>
+                <Button disabled={isSubmit} className="" onClick={toggle}>
                   ADD Transaction
                 </Button>
               </Col>
