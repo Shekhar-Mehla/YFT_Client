@@ -64,10 +64,14 @@ const handleOnSubmit = async (
     form.passwordHashed
   ) {
     // call user login api
-    const { status, message, token, User } = await loginUser(form);
-    console.log("user login function");
+
+    const pendingresponse = loginUser(form);
+    toast.promise(pendingresponse, {
+      pending: "please what while are fetching the data from server",
+    });
+    const { status, message, token, User } = await pendingresponse;
+
     if (status === "success") {
-      console.log("this login code is executed");
       localStorage.setItem("token", token);
       setUser(User);
 
@@ -81,7 +85,6 @@ const handleOnSubmit = async (
       setTransactions(result);
       toast[status](message);
     }
-    
 
     return;
   }
@@ -102,8 +105,6 @@ const handleOnSubmit = async (
     });
     const { status, message } = await pending;
     toast[status](message);
-    const initialstate = {email:""}
-    setForm(initialstate)
 
     return;
   }
@@ -120,6 +121,7 @@ const handleOnSubmit = async (
     !form.email
   ) {
     const resutl = resetPassword(resetToken, form);
+    console.log(result);
     return;
   }
 
@@ -143,7 +145,6 @@ const handleOnSubmit = async (
 
     return;
   }
-  
 
   return toast.error("password did not match");
 };

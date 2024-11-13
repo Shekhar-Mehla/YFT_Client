@@ -29,7 +29,7 @@ const ForgotPassword = () => {
               <h2 className="mb-3">Welcome Back!</h2>
               <p className="text-muted">
                 Please enter you vaild email address to recieve reset password
-                to your email.
+                link to your email.
               </p>
             </div>
 
