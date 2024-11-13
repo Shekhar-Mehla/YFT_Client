@@ -1,7 +1,7 @@
 import axios from "axios";
 // const baseurl = "http://localhost:3002/api/v1";
 const baseurl = import.meta.env.VITE_BASE_URL + "/api/v1";
-import { toast } from "react-toastify";
+
 console.log(baseurl);
 const ApiendPoint = async ({ data, method, url, headers }) => {
   try {
@@ -86,6 +86,32 @@ export const deleteTransaction = async (transactionsToDelete) => {
 
     headers: {
       Authorization: localStorage.getItem("token"),
+    },
+  };
+  const result = await ApiendPoint(obj);
+
+  return result;
+};
+// forgot password api
+export const forgotPassword = async (data) => {
+  const obj = {
+    method: "post",
+    url: baseurl + "/users/forgotPassword",
+    data,
+  };
+  const result = await ApiendPoint(obj);
+  console.log(result);
+  return result;
+};
+
+// this funtion will be called when user will send request to reset password
+export const resetPassword = async (token, data) => {
+  const obj = {
+    method: "patch",
+    url: baseurl + "/users/resetPassword",
+    data,
+    headers: {
+      Authorization: token,
     },
   };
   const result = await ApiendPoint(obj);

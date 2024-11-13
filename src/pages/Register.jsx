@@ -18,7 +18,9 @@ const Register = () => {
     (input) =>
       input.name != "Tittle" &&
       input.name != "amount" &&
-      input.name != "TransactionDate"
+      input.name != "TransactionDate" &&
+      input.name != "NewPasswordHashed" &&
+      input.name != "confirmNewPasswordHashed"
   );
   return (
     <>

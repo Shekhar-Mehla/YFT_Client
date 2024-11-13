@@ -3,16 +3,18 @@ import {
   postUser,
   loginUser,
   postTransaction,
+  forgotPassword,
+  resetPassword,
 } from "../AxiousHelper/axious.js";
 import { toast } from "react-toastify";
 import { userdata } from "../context/ContextApi.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { fetchTransactions } from "../Utility/fetchTransactions.js";
 // this function will be called each time we change in input filed
 const handleOnChange = (e, form, setForm) => {
   const { name, value } = e.target;
-  console.log(name, value);
+  console.log(name, "+", value);
 
   setForm({ ...form, [name]: value });
 };
@@ -25,16 +27,17 @@ const handleOnSubmit = async (
   navigate,
   setTransactions,
   toggle,
-  setIsSubmit
+  setIsSubmit,
+  resetToken,
+  setForm
 ) => {
-  console.log(e);
   // prevent the browser refresh on form submission
   e.preventDefault();
   setIsSubmit(true);
   setTimeout(() => {
     setIsSubmit(false);
     console.log("button is active now");
-  }, 3000);
+  }, 6000);
 
   // this code will be executed when user will register for the first time
   if (
@@ -53,10 +56,16 @@ const handleOnSubmit = async (
     return;
   }
   // this code will be executed when user will login
-  if (!form.confirmPasswordHashed && !form.type && !form.amount && !form.date) {
+  if (
+    !form.confirmPasswordHashed &&
+    !form.type &&
+    !form.amount &&
+    !form.date &&
+    form.passwordHashed
+  ) {
     // call user login api
     const { status, message, token, User } = await loginUser(form);
-    console.log(User);
+    console.log("user login function");
     if (status === "success") {
       console.log("this login code is executed");
       localStorage.setItem("token", token);
@@ -72,7 +81,45 @@ const handleOnSubmit = async (
       setTransactions(result);
       toast[status](message);
     }
+    
 
+    return;
+  }
+  // this code will be executed when user submit their email to get reset password link to their email addresss
+  if (
+    !form.confirmPasswordHashed &&
+    !form.type &&
+    !form.amount &&
+    !form.date &&
+    !form.passwordHashed &&
+    !form.NewPasswordHashed &&
+    !form.confirmNewPasswordHashed &&
+    form.email
+  ) {
+    const pending = forgotPassword(form);
+    toast.promise(pending, {
+      pending: "please what while are fetching the data from server",
+    });
+    const { status, message } = await pending;
+    toast[status](message);
+    const initialstate = {email:""}
+    setForm(initialstate)
+
+    return;
+  }
+  // this code will be executed only when user will send reset the password request
+
+  if (
+    !form.confirmPasswordHashed &&
+    !form.type &&
+    !form.amount &&
+    !form.date &&
+    !form.passwordHashed &&
+    form.NewPasswordHashed &&
+    form.confirmNewPasswordHashed &&
+    !form.email
+  ) {
+    const resutl = resetPassword(resetToken, form);
     return;
   }
 
@@ -96,14 +143,18 @@ const handleOnSubmit = async (
 
     return;
   }
+  
+
   return toast.error("password did not match");
 };
 
 export const useForm = () => {
   const [form, setForm] = useState({});
-  const { setUser, setTransactions, toggle, setIsSubmit, user } = userdata();
+  const { setUser, setTransactions, toggle, setIsSubmit } = userdata();
   const navigate = useNavigate();
-  console.log(user);
+  const location = useLocation();
+  const resetToken = location.pathname.split("/")[2];
+
   const value = {
     handleOnChange: (e) => handleOnChange(e, form, setForm),
 
@@ -116,7 +167,9 @@ export const useForm = () => {
         navigate,
         setTransactions,
         toggle,
-        setIsSubmit
+        setIsSubmit,
+        resetToken,
+        setForm
       ),
   };
 
