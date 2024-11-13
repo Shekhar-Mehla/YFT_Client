@@ -6,7 +6,6 @@ export const InputFields = [
     type: "text",
     name: "Tittle",
     required: true,
-    value: form.name,
   },
   {
     label: "Amount",
@@ -15,7 +14,6 @@ export const InputFields = [
     name: "amount",
     required: true,
     min: 0,
-    value: form.name,
   },
   {
     label: "Date of Transaction",
@@ -23,7 +21,6 @@ export const InputFields = [
     type: "date",
     name: "TransactionDate",
     required: true,
-    value: form.name,
   },
   {
     label: "First Name",
@@ -31,7 +28,6 @@ export const InputFields = [
     type: "text",
     name: "Fname",
     required: true,
-    value: form.name,
   },
   {
     label: "Last Name",
@@ -39,7 +35,6 @@ export const InputFields = [
     type: "text",
     name: "Lname",
     required: true,
-    value: form.name,
   },
   {
     label: "Email",
@@ -47,7 +42,6 @@ export const InputFields = [
     type: "email",
     name: "email",
     required: true,
-    value: form.name,
   },
   {
     label: "Password",
@@ -56,7 +50,6 @@ export const InputFields = [
     name: "passwordHashed",
     required: true,
     autoComplete: "new-password",
-    value: form.name,
   },
   {
     label: "Confirm Password",
@@ -65,7 +58,6 @@ export const InputFields = [
     name: "confirmPasswordHashed",
     autoComplete: "new-password",
     required: true,
-    value: form.name,
   },
 
   {
@@ -75,7 +67,6 @@ export const InputFields = [
     name: "NewPasswordHashed",
     autoComplete: "new-password",
     required: true,
-    value: form.name,
   },
   {
     label: "Confirm New Password",
@@ -84,6 +75,5 @@ export const InputFields = [
     name: "confirmNewPasswordHashed",
     autoComplete: "new-password",
     required: true,
-    value: form.name,
   },
 ];
