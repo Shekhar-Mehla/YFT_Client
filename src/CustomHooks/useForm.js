@@ -178,7 +178,10 @@ const handleOnSubmit = async (
 
     return;
   }
-
+  setTimeout(() => {
+    setIsSubmit(false);
+    console.log("button is active now");
+  }, 3000);
   return toast.error("password did not match");
 };
 
