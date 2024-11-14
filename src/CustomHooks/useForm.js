@@ -34,10 +34,10 @@ const handleOnSubmit = async (
   // prevent the browser refresh on form submission
   e.preventDefault();
   setIsSubmit(true);
-  setTimeout(() => {
-    setIsSubmit(false);
-    console.log("button is active now");
-  }, 6000);
+  // setTimeout(() => {
+  //   setIsSubmit(false);
+  //   console.log("button is active now");
+  // }, 6000);
 
   // this code will be executed when user will register for the first time
   if (
@@ -49,6 +49,12 @@ const handleOnSubmit = async (
       pending: "please wait your request is being processed",
     });
     const { status, message } = await result;
+    if (status) {
+      setTimeout(() => {
+        setIsSubmit(false);
+        console.log("button is active now");
+      }, 3000);
+    }
     toast[status](message);
     if (status === "success") {
       navigate("/login");
@@ -70,7 +76,12 @@ const handleOnSubmit = async (
       pending: "please what while are fetching the data from server",
     });
     const { status, message, token, User } = await pendingresponse;
-
+    if (status) {
+      setTimeout(() => {
+        setIsSubmit(false);
+        console.log("button is active now");
+      }, 3000);
+    }
     if (status === "success") {
       localStorage.setItem("token", token);
       setUser(User);
@@ -104,6 +115,12 @@ const handleOnSubmit = async (
       pending: "please what while are fetching the data from server",
     });
     const { status, message } = await pending;
+    if (status) {
+      setTimeout(() => {
+        setIsSubmit(false);
+        console.log("button is active now");
+      }, 3000);
+    }
     toast[status](message);
 
     return;
@@ -120,15 +137,31 @@ const handleOnSubmit = async (
     form.confirmNewPasswordHashed &&
     !form.email
   ) {
-    const resutl = resetPassword(resetToken, form);
-    console.log(result);
+    const pending = resetPassword(resetToken, form);
+    toast.promise(pending, {
+      pending: "please what while we are processing the your request",
+    });
+    const { status, message } = await pending;
+    if (status) {
+      setTimeout(() => {
+        setIsSubmit(false);
+        console.log("button is active now");
+      }, 3000);
+    }
+    toast[status](message);
+
     return;
   }
 
   // this code will be executed when user will add new transaction
   if (form.type || form.amount || form.date || form.Tittle) {
     const { status } = await postTransaction(form);
-    console.log(status);
+    if (status) {
+      setTimeout(() => {
+        setIsSubmit(false);
+        console.log("button is active now");
+      }, 3000);
+    }
     if (status == "success") {
       toggle();
 
