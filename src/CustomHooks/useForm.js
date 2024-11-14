@@ -95,8 +95,11 @@ const handleOnSubmit = async (
       const { result } = await pending;
       setTransactions(result);
       toast[status](message);
+      return;
     }
-
+    if (status == "error") {
+      return toast[status](message);
+    }
     return;
   }
   // this code will be executed when user submit their email to get reset password link to their email addresss
