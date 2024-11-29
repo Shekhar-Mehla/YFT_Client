@@ -30,7 +30,6 @@ const Login = () => {
 
   return (
     <>
-      (
       <Container className="bg-light vh-100">
         <Row className="justify-content-center align-items-center h-100">
           <Col md={6} className="d-none d-md-block p-0">
