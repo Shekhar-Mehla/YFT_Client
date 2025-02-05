@@ -1,7 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { FaUserEdit } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
+import { TbLogout2 } from "react-icons/tb";
+import { AiFillDashboard } from "react-icons/ai";
 
+import { TbTransactionDollar } from "react-icons/tb";
 import { userdata } from "../context/ContextApi.jsx";
 import { Link } from "react-router-dom";
 const NavigationBar = () => {
@@ -26,22 +31,23 @@ const NavigationBar = () => {
               {user._id ? (
                 <>
                   <Nav.Link as={Link} to="/dashboard">
-                    Dashboard
+                    <AiFillDashboard /> Dashboard
                   </Nav.Link>
                   <Nav.Link as={Link} to="/transactions">
-                    Transactions
+                    <TbTransactionDollar /> Transactions
                   </Nav.Link>
                   <Nav.Link as={Link} to="/login" onClick={onLogoutHandler}>
+                    <TbLogout2 />
                     Logout
                   </Nav.Link>
                 </>
               ) : (
                 <>
                   <Nav.Link as={Link} to="/login">
-                    Login
+                    <FaSignInAlt /> Login
                   </Nav.Link>
                   <Nav.Link as={Link} to="/register">
-                    Register
+                    <FaUserEdit /> Register
                   </Nav.Link>
                 </>
               )}

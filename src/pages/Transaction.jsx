@@ -3,6 +3,7 @@ import TransactionForm from "../Component/TransactionForm";
 import Table from "react-bootstrap/Table";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import { FaPlus } from "react-icons/fa";
 
 import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
@@ -134,7 +135,7 @@ const Transaction = () => {
               </Col>
               <Col md="auto" className="d-grid">
                 <Button disabled={isSubmit} className="" onClick={toggle}>
-                  ADD Transaction
+                  <FaPlus></FaPlus> ADD Transaction
                 </Button>
               </Col>
               {transactions?.length > 0 && (
