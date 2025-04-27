@@ -60,8 +60,10 @@ const Register = () => {
               </Button>
             </Form>
             <div className="mt-3 text-center">
+              {" "}
+              Already registered?
               <a href="/login" className="text-primary">
-                Already registered? Go to login
+                Go to login
               </a>
             </div>
           </Col>

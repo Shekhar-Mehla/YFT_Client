@@ -73,6 +73,11 @@ const Login = () => {
                 Don't have an account? <Link to="/register">Register now</Link>
               </p>
             </div>
+            <div className="card shadow-lg w-50 p-3">
+              <div className=" text-dark">Login Credential </div>
+              <div>email:a@b.com</div>
+              <div>password:123</div>
+            </div>
           </Col>
         </Row>
       </Container>
